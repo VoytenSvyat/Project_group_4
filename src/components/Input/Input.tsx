@@ -1,32 +1,36 @@
-import { InputContainer, Label, InputComponent, ErrorMessage } from './styles';
-import { InputProps } from './types';
+import React from 'react';
+import styled from '@emotion/styled';
 
-function Input({
-  placeholder,
-  name,
-  value,
-  type = 'text',
-  onChange,
-  label,
-  id,
-  search,
-  error
-}: InputProps) {
-  return (
-    <InputContainer>
-      <Label htmlFor={id}>{label}</Label>
-      <InputComponent
-        name={name}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        type={type}
-        id={id}
-        isSearch = {search}
-      />
-      <ErrorMessage>{error}</ErrorMessage>
-    </InputContainer>
-  )
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+  error?: string;
 }
 
-export default Input;
+export const Input: React.FC<Props> = ({ label, error, ...props }) => (
+  <Wrapper>
+    <label>{label}</label>
+    <input {...props} />
+    {error && <span>{error}</span>}
+  </Wrapper>
+);
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+
+  label {
+    margin-bottom: 4px;
+  }
+
+  input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  span {
+    color: red;
+    font-size: 12px;
+  }
+`;

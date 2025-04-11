@@ -1,6 +1,6 @@
-import { v4 } from "uuid"
-import { Link, useNavigate } from "react-router-dom"
-
+import { v4 as uuidv4 } from 'uuid';
+import { Link, useNavigate } from 'react-router-dom';
+import { StyledNavLink } from './styles'; // Импортируем StyledNavLink
 import {
   LayoutComponent,
   Header,
@@ -8,56 +8,49 @@ import {
   Nav,
   Main,
   Footer,
-  StyledNavLink,
-  LogoImage,
   ButtonContainer
-} from "./styles"
-import { LayoutProps, NavLinkObj } from "./types"
-import { navLinksData } from "./data"
-import Logo from '../../assets/avatar.jpg'
-import Button from "../Button/Button"
-
-
-
+} from './styles';
+import { LayoutProps, NavLinkObj } from './types';
+import { navLinksData } from './data';
+import Logo from '../../assets/avatar.jpg'; // Проверь правильность пути к изображению
+import Button from '../Button/Button';  // Убедись, что путь к Button правильный
 
 function Layout({ children }: LayoutProps) {
-
-
   const navigate = useNavigate();
 
+  // Функция для возврата на предыдущую страницу
   const goBack = () => {
-    navigate(-1)
-  }
+    navigate(-1);
+  };
 
-  const navLinks = navLinksData.map((navLink: NavLinkObj) => {
-    return (
-      <StyledNavLink key={v4()} to={navLink.to} style={
-        ({ isActive }) => ({ textDecoration: isActive ? 'underline' : 'none' })
-      }>{navLink.linkName}</StyledNavLink>
-    )
-  })
+  // Генерация ссылок на основе данных из navLinksData
+  const navLinks = navLinksData.map((navLink: NavLinkObj) => (
+    <StyledNavLink
+      key={uuidv4()}  // Генерация уникальных ключей
+      to={navLink.to}
+      className={({ isActive }) => (isActive ? 'active' : '')}
+    >
+      {navLink.linkName}
+    </StyledNavLink>
+  ));
 
   return (
-      <LayoutComponent>
-        <Header>
-          <Link to='/'>
-            <LogoImage src={Logo} />
-          </Link>
-          <Nav>
-            {/* NavLink - компонент библиотеки, который добавляет ссылку на 
-          страницу по маршруту через prop to */}
-            {navLinks}
-          </Nav>
-        </Header>
-        <Main>{children}</Main>
-        <Footer>
-          <ButtonContainer>
-            <Button name='<-' onClick={goBack} />
-          </ButtonContainer>
-          <LogoText>Company name</LogoText>
-        </Footer>
-      </LayoutComponent>
-  )
+    <LayoutComponent>
+      <Header>
+        <Link to='/'>
+          <img src={Logo} alt="Logo" />
+        </Link>
+        <Nav>{navLinks}</Nav>
+      </Header>
+      <Main>{children}</Main>
+      <Footer>
+        <ButtonContainer>
+          <Button name="<-" onClick={goBack} />
+        </ButtonContainer>
+        <LogoText>Company name</LogoText>
+      </Footer>
+    </LayoutComponent>
+  );
 }
 
-export default Layout
+export default Layout;

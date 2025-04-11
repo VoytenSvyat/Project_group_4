@@ -5,9 +5,10 @@ export interface LayoutProps {
 }
 
 export interface NavLinkObj {
-  to: string,
-  linkName: string
+  to: string;
+  linkName: string;
 }
+
 
 export interface JokeTextInterface {
   joke: string | undefined,
