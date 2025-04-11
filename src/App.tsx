@@ -1,31 +1,21 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LoginForm from './pages/LoginForm/LoginForm';
+import UserData from './pages/UserData/UserData';
+import { UserProvider } from './context/UserContext';
 
-
-import GlobalStyles from "./styles/GlobalStyles"
-import Layout from './components/Layout/Layout'
-import PageNotFound from './pages/PageNotFound/PageNotFound'
-
-
-function App() {
-
+const App: React.FC = () => {
   return (
-    //BrowserRouter - глобальная обёртка для всего приложения,
-    // которая позволяет использовать маршрутизацию
-    <BrowserRouter>
-      <GlobalStyles />
-      <Layout>
-        {/* Routes - обертка, которая собирает все маршруты приложения */}
+    <UserProvider>
+      <BrowserRouter>
         <Routes>
-          {/* Route - компонент библиотеки, в который передаётся маршрут и тот компонент (страницу),
-          который должен быть вызван, если выполнен переход по этому маршруту */}
-          {/* <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/course' element={<Course />} /> */}
-          <Route path='*' element={<PageNotFound />} />
+          <Route path="/" element={<LoginForm />} />
+          <Route path="/user-data" element={<UserData />} />
         </Routes>
-      </Layout>
-    </BrowserRouter>
-  )
-}
+      </BrowserRouter>
+    </UserProvider>
+  );
+};
 
-export default App
+export default App;
+

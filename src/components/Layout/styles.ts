@@ -27,11 +27,13 @@ export const Nav = styled.nav`
 `;
 
 export const StyledNavLink = styled(NavLink)`
- font-size: 24px;
- color: #38121f;
- font-weight: bold;
- text-decoration: none;
-`
+  text-decoration: none;
+  color: black;
+
+  &.active {
+    text-decoration: underline;
+  }
+`;
 
 export const Main = styled.main`
   display: flex;
