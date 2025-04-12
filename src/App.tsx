@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import GlobalStyles from "./styles/GlobalStyles"
 import Layout from './components/Layout/Layout'
 import PageNotFound from './pages/PageNotFound/PageNotFound'
+import UserData from './pages/PageNotFound/UserData/UserData'
 
 
 function App() {
@@ -21,7 +22,10 @@ function App() {
           {/* <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/course' element={<Course />} /> */}
+          <Route path='/userData' element={<UserData />} />
+
           <Route path='*' element={<PageNotFound />} />
+
         </Routes>
       </Layout>
     </BrowserRouter>
