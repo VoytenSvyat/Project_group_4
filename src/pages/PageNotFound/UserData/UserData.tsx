@@ -13,7 +13,9 @@ import { LoginFormContext } from "../context/LoginFormContext"; // предпо�
 function UserData() {
   const [userData, setUserData] = useState<any>(null);
   const [error, setError] = useState<string | undefined>(undefined);
+
   const { data, changeData } = useContext(LoginFormContext);
+  
   const deleteData = () => {
     changeData(undefined);
   };
