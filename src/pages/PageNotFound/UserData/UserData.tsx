@@ -1,52 +1,63 @@
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import {
   UserDataContainer,
   UserDataCard,
   UserDataName,
   UserDataInfo,
   Image,
-} from "./styles";
-import { LoginFormContext } from "../context/LoginFormContext"; // предполагаемое местоположение
-
-function UserData() {
-  const [userData, setUserData] = useState<any>(null);
-  const [error, setError] = useState<string | undefined>(undefined);
-
-  const { data, changeData } = useContext(LoginFormContext);
-  
-  const deleteData = () => {
-    changeData(undefined);
-  };
-  const USER_URL = "https://randomuser.me/api/";
-  const getUser = async () => {
-    setError(undefined);
+  LogoutButton,
+  ErrorText,
+} from './styles';
+import { useUserContext } from '../../context/UserContext';
+const UserData: React.FC = () => {
+  const { user, setUser } = useUserContext();
+  const navigate = useNavigate();
+  const [randomUser, setRandomUser] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+  const USER_API_URL = 'https://randomuser.me/api/';
+  const fetchRandomUser = async () => {
+    setError(null);
     try {
-      const response = await axios.get(USER_URL);
-      setUserData(response.data.results[0]);
-    } catch (error: any) {
-      setError("Произошла ошибка при загрузке данных");
-    } finally {
-      console.log("Результат получен");
+      const response = await axios.get(USER_API_URL);
+      setRandomUser(response.data.results[0]);
+    } catch (err) {
+      setError('Произошла ошибка при загрузке данных');
     }
   };
   useEffect(() => {
-    getUser();
+    fetchRandomUser();
   }, []);
-  if (!userData) return <div>Нет данных пользователя</div>;
+  const handleLogout = () => {
+    setUser(null);
+    navigate('/');
+  };
+  if (!user) {
+    return <UserDataContainer>Нет данных о текущем пользователе</UserDataContainer>;
+  }
   return (
     <UserDataContainer>
       <UserDataCard>
-        <Image src={userData.picture.large} alt="User" />
-        <UserDataName>
-          {userData.name.first} {userData.name.last}
-        </UserDataName>
-        <UserDataInfo>Email: {userData.email}</UserDataInfo>
-        <UserDataInfo>Location: {userData.location.country}</UserDataInfo>
-        <button onClick={deleteData}>Logout</button>
+        {randomUser && (
+          <Image src={randomUser.picture.large} alt="Random User" />
+        )}
+        <UserDataName>{user.name}</UserDataName>
+        <UserDataInfo>Email: {user.email}</UserDataInfo>
+        {randomUser && (
+          <>
+            <UserDataInfo>
+              Страна: {randomUser.location.country}
+            </UserDataInfo>
+            <UserDataInfo>
+              Город: {randomUser.location.city}
+            </UserDataInfo>
+          </>
+        )}
+        {error && <ErrorText>{error}</ErrorText>}
+        <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
       </UserDataCard>
     </UserDataContainer>
   );
-}
+};
 export default UserData;
