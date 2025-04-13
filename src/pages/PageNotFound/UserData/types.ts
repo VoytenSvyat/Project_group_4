@@ -1,6 +1,7 @@
-export interface UserData { 
-    firstName: string,
-    lastName: string,
-    city: string
+import { LoginForm } from "../LoginForm/types";
+
+export interface UserProps { 
+    userData: LoginForm
+   
 }
 
