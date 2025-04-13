@@ -1,50 +1,50 @@
-import { useContext, useState } from "react";
-import axios from "axios"
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import {
+  UserDataContainer,
+  UserDataCard,
+  UserDataName,
+  UserDataInfo,
+  Image,
+} from "./styles";
+import { LoginFormContext } from "../context/LoginFormContext"; // предполагаемое местоположение
 
-import { UserDataContainer, UserDataCard, UserDataName, UserDataInfo, Image } from "./styles"
-
-function UserData () {
-    const [user, setUser] = useState<string | undefined>(undefined);
-    const [error, setError] = useState<string | undefined>(undefined);
-    const [setUserData] = useState<any>(undefined);
-
-//Деструктурирующее присваивание
-    const { data, changeData } = useContext(LoginFormContext);
-
-    const deleteData = () => {
-        changeData(undefined)
+function UserData() {
+  const [userData, setUserData] = useState<any>(null);
+  const [error, setError] = useState<string | undefined>(undefined);
+  const { data, changeData } = useContext(LoginFormContext);
+  const deleteData = () => {
+    changeData(undefined);
+  };
+  const USER_URL = "https://randomuser.me/api/";
+  const getUser = async () => {
+    setError(undefined);
+    try {
+      const response = await axios.get(USER_URL);
+      setUserData(response.data.results[0]);
+    } catch (error: any) {
+      setError("Произошла ошибка при загрузке данных");
+    } finally {
+      console.log("Результат получен");
     }
-
-    //if (!user) return <div>Нет данных пользователя</div>
-
-    const USER_URL: string = "https://randomuser.me/api/";
-
-    const getUser = async () => { 
-        setError(undefined) 
-
-        try {
-            const response = await axios.get(USER_URL);
-            setUserData(response.data.result[0]);
-    
-           }
-            catch (error: any) { 
-        }
-        finally { 
-            console.log('Результат получен'); 
-            
-        }
-    }
-   
-return (
+  };
+  useEffect(() => {
+    getUser();
+  }, []);
+  if (!userData) return <div>Нет данных пользователя</div>;
+  return (
     <UserDataContainer>
-     <UserDataCard>
-        <UserDataName>First Name:{data?.firstName}</UserDataName>
-        <UserDataName>Last Name:{data?.lastName}</UserDataName>
-        <Image src="avatar.jpg"/>
-        <UserDataInfo>City:{data?.city}</UserDataInfo>
-        </UserDataCard>
+      <UserDataCard>
+        <Image src={userData.picture.large} alt="User" />
+        <UserDataName>
+          {userData.name.first} {userData.name.last}
+        </UserDataName>
+        <UserDataInfo>Email: {userData.email}</UserDataInfo>
+        <UserDataInfo>Location: {userData.location.country}</UserDataInfo>
+        <button onClick={deleteData}>Logout</button>
+      </UserDataCard>
     </UserDataContainer>
-    )
+  );
 }
-
-export default UserData
+export default UserData;
