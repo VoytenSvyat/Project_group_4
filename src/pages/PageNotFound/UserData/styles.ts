@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 export const UserDataContainer = styled.div`
   min-height: 100vh;
   background-color: #f3eee3;
@@ -47,5 +48,3 @@ export const ErrorText = styled.div`
   color: red;
   margin-top: 15px;
 `;
-
-

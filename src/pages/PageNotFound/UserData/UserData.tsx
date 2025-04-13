@@ -10,7 +10,8 @@ import {
   LogoutButton,
   ErrorText,
 } from './styles';
-import { useUserContext } from '../../context/UserContext';
+import { useUserContext } from '../../../context/UserContext';
+
 const UserData: React.FC = () => {
   const { user, setUser } = useUserContext();
   const navigate = useNavigate();
