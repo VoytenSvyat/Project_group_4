@@ -1,23 +1,21 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import GlobalStyles from "./styles/GlobalStyles";
-import Layout from './components/Layout/Layout';
-import PageNotFound from './pages/PageNotFound/PageNotFound';
-import LoginForm from "./components/LoginForm/LoginForm";
-import UserData from './pages/PageNotFound/UserData/UserData';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LoginForm from './pages/LoginForm/LoginForm';
+import UserData from './pages/UserData/UserData';
+import { UserProvider } from './context/UserContext';
 
-
-function App() {
+const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <GlobalStyles />
-      <Layout>
+    <UserProvider>
+      <BrowserRouter>
         <Routes>
-          <Route path='/' element={<LoginForm />} />
-          <Route path='/user-data' element={<UserData />} />
-          <Route path='*' element={<PageNotFound />} />
+          <Route path="/" element={<LoginForm />} />
+          <Route path="/user-data" element={<UserData />} />
         </Routes>
-      </Layout>
-    </BrowserRouter>
+      </BrowserRouter>
+    </UserProvider>
   );
-}
-export default App; 
+};
+
+export default App;
+

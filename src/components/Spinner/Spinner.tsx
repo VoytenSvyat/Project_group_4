@@ -1,7 +1,18 @@
-import { SpinnerComponent } from "./styles"
+import React from 'react';
+import styled from '@emotion/styled';
 
-function Spinner (){
-  return <SpinnerComponent></SpinnerComponent>
-}
+export const Spinner: React.FC = () => {
+  return <Loader>Loading...</Loader>;
+};
 
-export default Spinner
+const Loader = styled.div`
+  display: inline-block;
+  font-size: 24px;
+  color: #ff8c00;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
