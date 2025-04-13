@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { Input } from '../../components/Input/Input';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
-import * as S from './styles'; // Импорт стилей
+import * as S from './styles';
 import logo from '../../assets/logo.png';
 
 const LoginForm: React.FC = () => {
@@ -39,31 +39,38 @@ const LoginForm: React.FC = () => {
   });
 
   return (
-    <S.Wrapper>
-      <S.Logo src={logo} alt="Logo" />
-      <S.Title>Login Form</S.Title>
-      <S.Form onSubmit={formik.handleSubmit}>
-        <Input
-          label="Email"
-          name="email"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={formik.touched.email ? formik.errors.email : ''}
-        />
-        <Input
-          label="Password"
-          type="password"
-          name="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          error={formik.touched.password ? formik.errors.password : ''}
-        />
-        <S.Button type="submit" disabled={formik.isSubmitting}>
-          {formik.isSubmitting ? 'Loading...' : 'Login'}
-        </S.Button>
-        {formik.status && <S.Error>{formik.status}</S.Error>}
-      </S.Form>
-    </S.Wrapper>
+    <S.Container>
+      {}
+      <S.ImageSide /> 
+      <S.FormSide>
+        <S.LoginForm>
+          <S.Logo src={logo} alt="Logo" />
+          <S.Title>Login Form</S.Title>
+          <S.Form onSubmit={formik.handleSubmit}>
+            <Input
+              label="Email"
+              name="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email ? formik.errors.email : ''}
+            />
+            <Input
+              label="Password"
+              type="password"
+              name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password ? formik.errors.password : ''}
+            />
+            <S.Button type="submit" disabled={formik.isSubmitting}>
+              {formik.isSubmitting ? 'Loading...' : 'Login'}
+            </S.Button>
+            {formik.status && <S.Error>{formik.status}</S.Error>}
+          </S.Form>
+        </S.LoginForm>
+      </S.FormSide>
+      <S.RightSpace />
+    </S.Container>
   );
 };
 
