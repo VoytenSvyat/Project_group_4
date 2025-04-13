@@ -14,7 +14,7 @@ import {
 } from "./styles"
 import { LayoutProps, NavLinkObj } from "./types"
 import { navLinksData } from "./data"
-import Logo from '../../assets/avatar.jpg'
+//import Logo from '../../assets/avatar.jpg'
 import Button from "../Button/Button"
 
 
@@ -41,7 +41,7 @@ function Layout({ children }: LayoutProps) {
       <LayoutComponent>
         <Header>
           <Link to='/'>
-            <LogoImage src={Logo} />
+            {/*<LogoImage src={Logo} />*/}
           </Link>
           <Nav>
             {/* NavLink - компонент библиотеки, который добавляет ссылку на 
