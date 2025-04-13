@@ -1,0 +1,67 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #f1b433;  /* Это фон для всей страницы */
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f3eee3; /* Этот фон будет только для контейнера */
+  background-image: url('/touch1.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left center;
+}
+
+.image-side {
+  width: 33.33%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scene-image {
+  height: 90%;
+  object-fit: contain;
+  opacity: 0; 
+}
+
+.form-container {
+  width: 33.33%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.login-form input {
+  display: block;
+  margin: 15px auto;
+  padding: 10px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.login-form button {
+  padding: 10px 20px;
+  background-color: #f4a261;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.right-space {
+  width: 33.33%;
+}

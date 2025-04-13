@@ -1,13 +1,41 @@
-// styles.ts
 import styled from '@emotion/styled';
+import bgImage from '../../assets/touch2.png'; 
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+  background-image: url(${bgImage});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+`;
+
+export const ImageSide = styled.div`
+  width: 33.33%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: #f5f5f5;
+`;
+
+export const SceneImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+`;
+
+export const FormSide = styled.div`
+  width: 33.33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const LoginForm = styled.div`
+  background: rgba(255, 255, 255, 0.753);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
   text-align: center;
 `;
 
@@ -53,3 +81,6 @@ export const Error = styled.div`
   color: red;
 `;
 
+export const RightSpace = styled.div`
+  width: 33.33%;
+`;
