@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -9,6 +9,7 @@ import {
   Image,
   LogoutButton,
   ErrorText,
+  NavigateButton,
 } from './styles';
 import { useUserContext } from '../../context/UserContext';
 const UserData: React.FC = () => {
@@ -34,6 +35,11 @@ const UserData: React.FC = () => {
     setUser(null);
     navigate('/');
   };
+
+  const navigateToHistory = () => {
+    navigate('/user-history');
+  };
+
   if (!user) {
     return <UserDataContainer>Нет данных о текущем пользователе</UserDataContainer>;
   }
@@ -57,6 +63,7 @@ const UserData: React.FC = () => {
         )}
         {error && <ErrorText>{error}</ErrorText>}
         <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
+        <NavigateButton onClick={navigateToHistory}>User History</NavigateButton>
       </UserDataCard>
     </UserDataContainer>
   );
