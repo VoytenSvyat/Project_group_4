@@ -43,6 +43,22 @@ export const LogoutButton = styled.button`
     background-color: #d65a3b;
   }
 `;
+
+export const NavigateButton = styled.button`
+  background-color: #22b8cf;
+  color: white;
+  margin: 8px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+
+  &:hover {
+    background-color: #1a90a5;
+  }
+`; 
 export const ErrorText = styled.div`
   color: red;
   margin-top: 15px;
