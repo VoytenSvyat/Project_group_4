@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import * as S from './styles';
 import logo from '../../assets/logo.png';
+import axios from 'axios';
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
@@ -21,13 +22,15 @@ const LoginForm: React.FC = () => {
         .required('Email is required')
         .min(12, 'Minimum 12 characters')
         .max(40, 'Maximum 40 characters'),
-      password: Yup.string().required('Password is required'),
+      password: Yup.string().required('Password is required')
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Пароль должен содержать min 8 символов (заглавная буква, строчная, цифра, спецсимвол)'
+    ),
     }),
     onSubmit: async (values, { setSubmitting, setStatus }) => {
       setSubmitting(true);
       try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
-        const data = await response.json();
+        const { data } = await axios.get('https://jsonplaceholder.typicode.com/users/1');
         setUser({ id: data.id, name: data.name, email: data.email });
         navigate('/user-data');
       } catch (error) {

@@ -17,6 +17,7 @@ const UserData: React.FC = () => {
   const [randomUser, setRandomUser] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const USER_API_URL = 'https://randomuser.me/api/';
+
   const fetchRandomUser = async () => {
     setError(null);
     try {
